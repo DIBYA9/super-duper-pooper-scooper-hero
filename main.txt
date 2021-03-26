@@ -1,0 +1,164 @@
+var canvas=new fabric.Canvas("myCanvas");
+p_x= 10;
+p_y=10;
+b_w=30;
+b_h=30;
+var player_object="";
+var block_img="";
+function p_u() {
+    fabric.Image.fromURL("player.png",function(Img){
+        player_object=Img;
+        player_object.scaleToWidth(150);
+        player_object.scaleToWidth(150);
+        player_object.set({
+            left:p_x,
+            top:p_y
+            
+        });
+        canvas.add(player_object);
+
+    });
+
+    
+}
+
+function new_img(get_image) {
+    fabric.Image.fromURL(get_image,function(Img){
+        block_img=Img;
+        block_img.scaleToWidth(b_w);
+        block_img.scaleToWidth(b_h);
+        block_img.set({
+            left:p_x,
+            top:p_y
+            
+        });
+        canvas.add(block_img);
+
+    });
+}
+window.addEventListener("keydown",keypressed);
+function keypressed(e) {
+    keypressed=e.keyCode;
+    console.log(keypressed);
+    if(e.shiftKey == true && keypressed=='80'){
+        console.log("shift and P are pressed together");
+        b_w=b_w+10;
+        b_h=b_h+10;
+        document.getElementById("Current_width").innerHTML=b_w;
+        document.getElementById("current_height").innerHTML=b_h;
+    }
+    if(e.shiftKey == true && keypressed=='77'){
+        console.log("shift and M are pressed together");
+        b_w=b_w-10;
+        b_h=b_h-10;
+        document.getElementById("Current_width").innerHTML=b_w;
+        document.getElementById("current_height").innerHTML=b_h;
+    }
+    if(keypressed=="38"){
+        up();
+        console.log("up is pressed");
+
+
+    }
+    if(keypressed=="40"){
+        down();
+        console.log("down is pressed");
+        
+
+    }
+    if(keypressed=="37"){
+        left();
+        console.log("left is pressed");
+        
+
+    }
+    if(keypressed=="39"){
+        right();
+        console.log("right is pressed");
+        
+
+    }
+    
+    if(keypressed=="87"){
+        new_img('wall.jpg');
+        console.log("w");
+    }
+    if(keypressed=="71"){
+        new_img('ground.png');
+        console.log("g");
+    }
+    if(keypressed=="76"){
+        new_img('light_green.png');
+        console.log("l");
+    }
+    if(keypressed=="84"){
+        new_img('trunk.jpg');
+        console.log("t");
+    }
+    if(keypressed=="82"){
+        new_img('roof.jpg');
+        console.log("r");
+    }
+    if(keypressed=="89"){
+        new_img('yellow_wall.png');
+        console.log("y");
+    }
+    if(keypressed=="68"){
+        new_img('dark_green.png');
+        console.log("d");
+        
+        
+    }
+    if(keypressed=="85"){
+        new_img('unique.png');
+        console.log("u");
+    }
+    if(keypressed=="67"){
+        new_img('cloud.jpg');
+        console.log("c");
+    }
+
+}
+
+
+
+function up() {
+    if(p_y>=0){
+        p_y=p_y-b_h;
+        console.log("up pressed");
+        console.log("block img height is" + b_h);
+        console.log("player x is" + p_x + "player y is" + p_y);
+        canvas.remove(player_object);
+        p_u();
+    }
+}
+function down() {
+    if(p_y<=460){
+        p_y=p_y+b_h;
+        console.log("down pressed");
+        console.log("block img height is" + b_h);
+        console.log("player x is" + p_x + "player y is" + p_y);
+        canvas.remove(player_object);
+        p_u();
+    }
+}
+function left() {
+    if(p_x>=0){
+        p_x=p_x-b_w;
+        console.log("left pressed");
+        console.log("block img width is" + b_w);
+        console.log("player x is" + p_x + "player y is" + p_y);
+        canvas.remove(player_object);
+        p_u();
+    }
+}
+function right() {
+    if(p_x<=850){
+        p_x=p_x+b_w;
+        console.log("right pressed");
+        console.log("block img width is" + b_w);
+        console.log("player x is" + p_x + "player y is" + p_y);
+        canvas.remove(player_object);
+        p_u();
+    }
+}
